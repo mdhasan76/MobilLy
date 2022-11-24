@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom'
 import Header from '../../shared/Header';
-import { BiUser } from 'react-icons/bi';
+import { AiOutlineMail } from 'react-icons/ai';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../shared/AuthProvider';
@@ -49,7 +49,7 @@ const Login = () => {
         <section>
             <Header />
             <div>
-                <div className="hero h-[89vh] bg-gradient-to-bl from-indigo-500 via-purple-500 to-primary ">
+                <div className="hero min-h-[89vh] bg-gradient-to-bl from-indigo-500 via-purple-500 to-primary ">
                     <div className="hero-content">
                         <div className="w-full shadow-2xl bg-base-100 card-body ">
                             <form onSubmit={handleLogIn}>
@@ -58,7 +58,7 @@ const Login = () => {
                                         <span className="label-text text-lg font-semibold"> Email</span>
                                     </label>
                                     <div>
-                                        <BiUser className='inline-block text-lg font-medium' />
+                                        <AiOutlineMail className='inline-block text-lg font-medium' />
                                         <input type="email" name="email" placeholder="email" className="p-3 border-b-2 focus:outline-none focus:border-b-4 font-medium text-lg" />
                                     </div>
                                 </div>
