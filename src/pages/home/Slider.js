@@ -9,7 +9,7 @@ const Slider = () => {
             <div id="slide1" className="carousel-item relative w-full">
                 <img src={vivo} className="w-full h-[450px]" alt='vivo' />
                 <div className="absolute flex justify-between transform -translate-y-1/2 left-5 bg-gradient-to-r from-slate-800 h-full items-center ml-[-20px] right-5 top-1/2">
-                    <a href="#slide3" className="btn btn-circle">❮</a>
+                    <a href="#slide3" className="btn btn-circle ml-5">❮</a>
                     <div className='text-center'>
                         <h3 className='text-3xl sm:text-6xl text-white font-semibold'>New Vivo phone Collection</h3>
                         <p className='text-sm sm:text-lg py-3 text-white  opacity-90'>Clean Second Hand VIVO Phone. <br />
@@ -23,7 +23,7 @@ const Slider = () => {
             <div id="slide2" className="carousel-item relative w-full">
                 <img src={samsung} className="w-full  h-[450px]" alt='samsung' />
                 <div className="absolute flex justify-between transform -translate-y-1/2 left-5 bg-gradient-to-r from-slate-800 h-full items-center ml-[-20px] right-5 top-1/2">
-                    <a href="#slide1" className="btn btn-circle">❮</a>
+                    <a href="#slide1" className="btn btn-circle ml-5">❮</a>
                     <div className='text-center'>
                         <h3 className='text-3xl sm:text-6xl text-white font-semibold'>New Samsung phone Collection</h3>
                         <p className='text-sm sm:text-lg py-3 text-white  opacity-90'>Clean Second Hand VIVO Phone. <br />
@@ -37,7 +37,7 @@ const Slider = () => {
             <div id="slide3" className="carousel-item relative w-full">
                 <img src={realme} className="w-full h-[450px]" alt='realme' />
                 <div className="absolute flex justify-between transform -translate-y-1/2 left-5 bg-gradient-to-r from-slate-800 h-full items-center ml-[-20px] right-5 top-1/2">
-                    <a href="#slide2" className="btn btn-circle">❮</a>
+                    <a href="#slide2" className="btn btn-circle ml-5">❮</a>
                     <div className='text-center'>
                         <h3 className='text-3xl sm:text-6xl text-white font-semibold'>Newest Realme phone Collection</h3>
                         <p className='text-sm sm:text-lg py-3 text-white  opacity-90'>Clean Second Hand Realme Phone. <br />
