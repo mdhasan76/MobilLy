@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom'
+import { AuthContext } from './AuthProvider';
+import toast from 'react-hot-toast'
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext);
+
+    //logOUt user 
+    const handleLogOut = () => {
+        logOut()
+            .then(res => {
+                toast.success("Log out sucessFul");
+            })
+            .catch(err => console.log(err))
+    }
     return (
         <div className="navbar bg-white sticky top-0 z-10 ">
             <div className="navbar-start">
@@ -45,7 +57,10 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a href="/" className="btn">Get started</a>
+                {
+                    user?.email ? <button onClick={handleLogOut} className='btn btn-primary'>Logout
+                    </button> :
+                        <Link to='/login' className='btn btn-primary'>Login</Link>}
             </div>
         </div>
     );
