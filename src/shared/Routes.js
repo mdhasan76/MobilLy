@@ -4,6 +4,7 @@ import Blog from "../pages/blog/Blog";
 import Error404 from "../pages/error404/Error404";
 import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
+import Category from "../pages/product_category/Category";
 import SignUp from "../pages/signUp/SignUp";
 
 export const router = createBrowserRouter([
@@ -19,6 +20,11 @@ export const router = createBrowserRouter([
                 path: '/blog',
                 element: <Blog />
             },
+            {
+                path: '/category/:id',
+                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`),
+                element: <Category />
+            }
         ]
     },
 
