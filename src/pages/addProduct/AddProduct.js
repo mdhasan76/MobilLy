@@ -1,18 +1,57 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../shared/AuthProvider';
+import toast from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { user } = useContext(AuthContext)
-
+    const { user } = useContext(AuthContext);
+    const imgbbAPI = process.env.REACT_APP_imgbb;
+    const navigate = useNavigate()
     //handle data
     const handleAddProduct = (data) => {
-        // const date = new Date();
-        // console.log(date)
-        // date.slice(0, 20);
-        // data.postTime = date;
-        // console.log(data)
+
+        // const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        //date Format
+        const today = new Date().toLocaleString("en-US");
+        data.postTime = today;
+
+        //img upload in Imgbb
+        const img = data.img[0];
+        const formData = new FormData();
+        formData.append('image', img);
+        fetch(`https://api.imgbb.com/1/upload?expiration=600&key=${imgbbAPI}`, {
+            method: "POST",
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgdata => {
+                const productImgUrl = imgdata.data.url;
+                data.img = productImgUrl;
+                data.selersName = user?.displayName;
+                data.isVerified = false;
+                data.email = user?.email;
+                //send data for save in database 
+                fetch(`${process.env.REACT_APP_URL}/addproduct`, {
+                    method: "POST",
+                    headers: {
+                        "content-type": 'application/json',
+                        authorization: `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(res => res.json())
+                    .then(dbdata => {
+                        if (dbdata.acknowledged) {
+                            console.log(dbdata)
+                            toast.success("Add Product successfull")
+                            navigate('/')
+                        }
+                    })
+                console.log(data)
+            })
+
     }
     // condition, description, img, location, marketPrice, name, postTime, selersName, selingPrice, useTime, ramRoom, isVerified, _id
     return (
@@ -65,6 +104,17 @@ const AddProduct = () => {
                             required />
                         {errors.phoneNumber && <p className='text-red-500'>{errors.phoneNumber.message}</p>}
                     </div>
+                </div>
+                <div className="form-control mb-3">
+                    <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="grid-first-name">
+                        Product img
+                    </label>
+
+                    <input type="file" placeholder="img" className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+                        {...register('img', { required: "img is require" })} />
+                    {
+                        errors.img && <p className='text-red-500'>{errors.img.message}</p>
+                    }
                 </div>
                 <div className="-mx-3 md:flex mb-6">
                     <div className="md:w-full px-3">

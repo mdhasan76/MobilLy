@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router-dom'
 import ProductCard from './ProductCard';
 const Category = () => {
     const data = useLoaderData();
-    console.log(data)
+    console.log(data[0])
     return (
         <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 mb-10'>
             {

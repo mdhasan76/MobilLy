@@ -39,7 +39,34 @@ const Login = () => {
     const handleGoogle = () => {
         googleSignIn()
             .then(res => {
-                toast.success("Log in Sucessfull")
+                const data = res.user;
+
+                //set a object for send data to server
+                const user = {
+                    name: data.displayName,
+                    email: data.email,
+                    img: data.photoURL,
+                    title: "buyer"
+                }
+
+                // send data in server for save db 
+                fetch(`${process.env.REACT_APP_URL}/users`, {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json',
+                        authorization: `bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(res => res.json())
+                    .then(dbdata => {
+                        if (dbdata.acknowledged) {
+                            console.log(dbdata)
+                            toast.success("Log in Sucessfull")
+                            console.log(res.user);
+                            navigate('/')
+                        }
+                    })
             })
             .catch(err => {
                 setError(err.message)
