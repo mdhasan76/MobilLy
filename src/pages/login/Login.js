@@ -64,7 +64,7 @@ const Login = () => {
                             console.log(dbdata)
                             toast.success("Log in Sucessfull")
                             console.log(res.user);
-                            navigate('/')
+                            navigate(from, { replace: true })
                         }
                     })
             })

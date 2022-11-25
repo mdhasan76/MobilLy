@@ -34,8 +34,12 @@ const Header = () => {
                                 <li><Link to='/3'>Realme</Link></li>
                             </ul>
                         </li>
-                        <li><Link to='/addproduct'>Add Product</Link></li>
                         <li><Link to='/blog'>Blog</Link></li>
+                        {
+                            user?.email &&
+                            <li><Link to='/dashboard'>Dashboard</Link></li>
+
+                        }
                     </ul>
                 </div>
                 <a href="/" className="btn btn-ghost normal-case text-xl">MobilLy</a>
@@ -54,8 +58,12 @@ const Header = () => {
                             <li><Link to='/category/3'>Realme</Link></li>
                         </ul>
                     </li>
-                    <li><Link to='/addproduct'>Add Product</Link></li>
                     <li><Link to='/blog'>Blog</Link></li>
+                    {
+                        user?.email &&
+                        <li><Link to='/dashboard'>Dashboard</Link></li>
+
+                    }
                 </ul>
             </div>
             <div className="navbar-end">

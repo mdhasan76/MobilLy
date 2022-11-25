@@ -55,7 +55,7 @@ const AddProduct = () => {
     }
     // condition, description, img, location, marketPrice, name, postTime, selersName, selingPrice, useTime, ramRoom, isVerified, _id
     return (
-        <div>
+        <div className='mt-20'>
             <form onSubmit={handleSubmit(handleAddProduct)} className="bg-white max-w-3xl mx-auto shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
                 <div className="-mx-3 md:flex mb-6">
                     <div className="md:w-1/2 px-3 mb-6 md:mb-0">
