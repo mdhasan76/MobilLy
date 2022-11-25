@@ -19,6 +19,7 @@ const SignUp = () => {
 
     //Log in User
     const handlesingUp = (data) => {
+        console.log(data)
         const img = data.img[0];
         setDataLoading(true)
         // upload img in imgbb 
@@ -51,70 +52,68 @@ const SignUp = () => {
     return (
         <section>
             <Header />
-            <div>
-                <div className="hero min-h-[89vh] bg-gradient-to-bl from-indigo-500 via-purple-500 to-primary ">
-                    <div className="hero-content">
-                        <div className="w-full shadow-2xl bg-base-100 card-body ">
+            <div className=' bg-gradient-to-bl from-indigo-500 via-purple-500 to-primary'>
+                <div className="hero min-h-[89vh] ">
+                    <div className="hero-content max-w-lg">
+                        <div className="w-full shadow-2xl bg-white card-body ">
                             <form onSubmit={handleSubmit(handlesingUp)}>
-                                <div className="form-control">
+                                <div className="form-control mb-3">
                                     <label className="label pb-0">
-                                        <span className="label-text text-lg font-semibold">Your Name</span>
+                                        <span className="label-text text-lg font-semibold"><BiUser className='inline-block text-lg font-medium mr-2' />Your Name</span>
                                     </label>
-                                    <div>
-                                        <BiUser className='inline-block text-lg font-medium' />
-                                        <input type="text" placeholder="name" className="p-3 border-b-2 focus:outline-none focus:border-b-4 font-medium text-lg"
-                                            {...register('name', { required: "name is require" })} />
-                                        {
-                                            errors.name && <p className='text-red-500'>{errors.name.message}</p>
-                                        }
-                                    </div>
+                                    <input type="text" placeholder="name" className="p-3 border-b-2 focus:outline-none focus:border-b-4 font-medium text-lg"
+                                        {...register('name', { required: "name is require" })} />
+                                    {
+                                        errors.name && <p className='text-red-500'>{errors.name.message}</p>
+                                    }
                                 </div>
-                                <div className="form-control">
+                                <div className="form-control mb-3">
                                     <label className="label pb-0">
-                                        <span className="label-text text-lg font-semibold">Your img</span>
+                                        <span className="label-text text-lg font-semibold"><ImImage className='inline-block text-lg font-medium mr-2' />Your img</span>
                                     </label>
-                                    <div>
-                                        <ImImage className='inline-block text-lg font-medium' />
-                                        <input type="file" placeholder="img" className="p-3 border-b-2 focus:outline-none focus:border-b-4 font-medium text-lg"
-                                            {...register('img', { required: "img is require" })} />
-                                        {
-                                            errors.img && <p className='text-red-500'>{errors.img.message}</p>
-                                        }
-                                    </div>
+
+                                    <input type="file" placeholder="img" className="p-3 border-b-2 focus:outline-none focus:border-b-4"
+                                        {...register('img', { required: "img is require" })} />
+                                    {
+                                        errors.img && <p className='text-red-500'>{errors.img.message}</p>
+                                    }
                                 </div>
-                                <div className="form-control">
+                                <div className="form-control mb-3">
                                     <label className="label pb-0">
-                                        <span className="label-text text-lg font-semibold"> Email</span>
+                                        <span className="label-text text-lg font-semibold">
+                                            <AiOutlineMail className='inline-block text-lg font-medium mr-2' /> Email</span>
                                     </label>
-                                    <div>
-                                        <AiOutlineMail className='inline-block text-lg font-medium' />
-                                        <input type="email" placeholder="email" className="p-3 border-b-2 focus:outline-none focus:border-b-4 font-medium text-lg"
-                                            {...register('email', { required: "email dite hobe vai" })} />
-                                        {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
-                                    </div>
+                                    <input type="email" placeholder="email" className="p-3 border-b-2 focus:outline-none focus:border-b-4 font-medium text-lg"
+                                        {...register('email', { required: "email dite hobe vai" })} />
+                                    {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
                                 </div>
-                                <div className="form-control">
+                                <div className="form-control mb-3">
                                     <label className="label pb-0">
-                                        <span className="label-text text-lg font-semibold">Password</span>
+                                        <span className="label-text text-lg font-semibold">
+                                            <RiLockPasswordLine className='inline-block text-lg font-medium mr-2' />Password</span>
                                     </label>
-                                    <div>
-                                        <RiLockPasswordLine className='inline-block text-lg font-medium' />
-                                        <input type="password" placeholder="Password" name='password' className="p-3 border-b-2 focus:outline-none focus:border-b-4 font-medium text-lg"
-                                            {...register("password",
-                                                {
-                                                    required: "Password Required",
-                                                    minLength: { value: 6, message: "Min 6 charecter pass use" },
-                                                    pattern: {
-                                                        value: /(?=.*[A-Z])/,
-                                                        message: "Use 1 capital letter"
-                                                    }
-                                                })}
-                                        />
-                                        {errors?.password && <p className='text-red-500'>{errors?.password.message}</p>}
-                                    </div>
+                                    <input type="password" placeholder="Password" name='password' className="p-3 border-b-2 focus:outline-none focus:border-b-4 font-medium text-lg"
+                                        {...register("password",
+                                            {
+                                                required: "Password Required",
+                                                minLength: { value: 6, message: "Min 6 charecter pass use" },
+                                                pattern: {
+                                                    value: /(?=.*[A-Z])/,
+                                                    message: "Use 1 capital letter"
+                                                }
+                                            })}
+                                    />
+                                    {errors?.password && <p className='text-red-500'>{errors?.password.message}</p>}
 
                                     <p className='block text-right text-sm label opacity-80'>Have account?
                                         <Link to='/login' className='label-text-alt link link-hover font-medium inline'> login</Link> </p>
+                                </div>
+                                <div className='p-3'>
+                                    <span>Want to: </span>
+                                    <select {...register('title')} className='p-2 font-medium'>
+                                        <option value="buyer">Buyer</option>
+                                        <option value="seller">Seller</option>
+                                    </select>
                                 </div>
                                 <div className="form-control mt-3">
                                     {dataLoading ? <button className="btn text-white border-none rounded-full bg-gradient-to-bl from-indigo-500 to-primary"> <svg className="animate-spin bg-white h-5 w-5 mr-3" viewBox="0 0 24 24"></svg> </button> : <button className="btn text-white border-none rounded-full bg-gradient-to-bl from-indigo-500 to-primary">Register </button>}
