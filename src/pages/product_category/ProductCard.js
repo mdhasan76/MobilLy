@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { MdVerified } from 'react-icons/md'
 
 const ProductCard = ({ productItem }) => {
-
     //distructure product items
     const { condition, description, img, location, marketPrice, name, postTime, selersName, selingPrice, useTime, ramRoom, isVerified, _id } = productItem;
 
