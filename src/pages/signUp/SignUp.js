@@ -16,12 +16,11 @@ const SignUp = () => {
     const imgbbAPI = process.env.REACT_APP_imgbb;
     const navigate = useNavigate();
     const [dataLoading, setDataLoading] = useState(false)
-
     //Log in User
     const handlesingUp = (data) => {
-        console.log(data)
         const img = data.img[0];
         setDataLoading(true)
+
         // upload img in imgbb 
         const formData = new FormData();
         formData.append('image', img)
@@ -32,21 +31,51 @@ const SignUp = () => {
             .then(res => res.json())
             .then(imgdata => {
                 const userImg = imgdata.data.url;
+                const user = {
+                    name: data.name,
+                    email: data.email,
+                    password: data.password,
+                    img: userImg,
+                    title: data.title
 
+                }
+                // console.log(user)
                 //Create user
                 createNewUser(data.email, data.password)
                     .then(res => {
                         //update userName and img
                         updateUser(data.name, userImg)
                             .then(() => {
-                                toast.success("Create Your accoutn")
-                                console.log(res.user);
-                                setDataLoading(false)
-                                navigate('/')
+                                //saveData on database
+                                fetch(`${process.env.REACT_APP_URL}/users`, {
+                                    method: "POST",
+                                    headers: {
+                                        'content-type': 'application/json',
+                                        authorization: `bearer ${localStorage.getItem('token')}`
+                                    },
+                                    body: JSON.stringify(user)
+                                })
+                                    .then(res => res.json())
+                                    .then(dbdata => {
+                                        if (dbdata.acknowledged) {
+                                            // console.log(data)
+                                            console.log(dbdata)
+                                            toast.success("Create Your account successfull")
+                                            console.log(res.user);
+                                            setDataLoading(false)
+                                            navigate('/')
+                                        }
+                                    })
                             })
-                            .catch(err => toast.error(err.message))
+                            .catch(err => {
+                                toast.error(err.message)
+                                setDataLoading(false)
+                            })
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => {
+                        console.log(err)
+                        setDataLoading(false)
+                    })
             })
     }
     return (
@@ -116,7 +145,7 @@ const SignUp = () => {
                                     </select>
                                 </div>
                                 <div className="form-control mt-3">
-                                    {dataLoading ? <button className="btn text-white border-none rounded-full bg-gradient-to-bl from-indigo-500 to-primary"> <svg className="animate-spin bg-white h-5 w-5 mr-3" viewBox="0 0 24 24"></svg> </button> : <button className="btn text-white border-none rounded-full bg-gradient-to-bl from-indigo-500 to-primary">Register </button>}
+                                    {dataLoading === true ? <button className="btn text-white border-none rounded-full bg-gradient-to-bl from-indigo-500 to-primary"> <svg className="animate-spin bg-white h-5 w-5 mr-3" viewBox="0 0 24 24"></svg> </button> : <button className="btn text-white border-none rounded-full bg-gradient-to-bl from-indigo-500 to-primary">Register </button>}
                                 </div>
                             </form>
                         </div>
