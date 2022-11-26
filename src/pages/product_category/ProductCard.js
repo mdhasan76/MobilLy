@@ -6,7 +6,7 @@ import { MdVerified } from 'react-icons/md';
 
 const ProductCard = ({ productItem, setProductData }) => {
     //distructure product items
-    const { condition, description, img, location, marketPrice, name, postTime, selersName, selingPrice, useTime, ramRoom, isVerified, _id } = productItem;
+    const { condition, description, img, location, marketPrice, name, postTime, selersName, selingPrice, useTime, ramRoom, isVerified } = productItem;
 
     //Bookin function
     // const handleBook = (id) => {
@@ -33,7 +33,7 @@ const ProductCard = ({ productItem, setProductData }) => {
                 <p> {description}</p>
                 <div className="card-actions justify-between mt-5">
                     <p className='text-lg'>Seller: <span className='font-bold'>{selersName}{isVerified && <MdVerified className='text-primary inline-block align-text-top' />}</span></p>
-                    <label onClick={() => setProductData(productItem)} htmlFor="buynow-modal" className="btn btn-primary text-white">open modal</label>
+                    <label onClick={() => setProductData(productItem)} htmlFor="buynow-modal" className="btn btn-primary text-white">Booked now</label>
                 </div>
             </div>
         </div>
