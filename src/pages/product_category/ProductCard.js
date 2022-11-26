@@ -2,16 +2,16 @@ import React from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { Link } from 'react-router-dom';
-import { MdVerified } from 'react-icons/md'
+import { MdVerified } from 'react-icons/md';
 
-const ProductCard = ({ productItem }) => {
+const ProductCard = ({ productItem, setProductData }) => {
     //distructure product items
     const { condition, description, img, location, marketPrice, name, postTime, selersName, selingPrice, useTime, ramRoom, isVerified, _id } = productItem;
 
     //Bookin function
-    const handleBook = (id) => {
-        console.log(id, 'Booked')
-    }
+    // const handleBook = (id) => {
+    //     console.log(id, 'Booked')
+    // }
 
 
     return (
@@ -33,7 +33,7 @@ const ProductCard = ({ productItem }) => {
                 <p> {description}</p>
                 <div className="card-actions justify-between mt-5">
                     <p className='text-lg'>Seller: <span className='font-bold'>{selersName}{isVerified && <MdVerified className='text-primary inline-block align-text-top' />}</span></p>
-                    <button onClick={() => handleBook(_id)} className="btn btn-primary text-white">Book now</button>
+                    <label onClick={() => setProductData(productItem)} htmlFor="buynow-modal" className="btn btn-primary text-white">open modal</label>
                 </div>
             </div>
         </div>
