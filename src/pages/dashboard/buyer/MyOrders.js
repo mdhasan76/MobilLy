@@ -5,7 +5,7 @@ import { AuthContext } from '../../../shared/AuthProvider';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
-    const { data: myOrders = [], refetch } = useQuery({
+    const { data: myOrders = [] } = useQuery({
         queryKey: ['/myorders', user?.email],
         queryFn: async () => {
             try {

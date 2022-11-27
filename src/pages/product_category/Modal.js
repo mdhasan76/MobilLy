@@ -7,11 +7,12 @@ const Modal = ({ productData, setProductData, refetch }) => {
     const { user } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const { name, selingPrice, img } = productData;
+    const { name, selingPrice, img, _id } = productData;
 
     const handleBook = (data) => {
         // console.log(data)
         data.productImg = img;
+        data.productId = _id;
         fetch(`${process.env.REACT_APP_URL}/booking`, {
             method: "POST",
             headers: {

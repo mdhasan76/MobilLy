@@ -11,6 +11,8 @@ const AllSellers = () => {
             return output
         }
     })
+
+    //Delete User 
     const handleDelete = (seller) => {
         const confirmModal = window.confirm(`Do you Want to Delete ${seller.name} user?`)
         if (confirmModal) {
@@ -28,6 +30,23 @@ const AllSellers = () => {
                     }
                 })
         }
+    }
+
+    //verify User
+    const handleVerify = (id) => {
+        fetch(`${process.env.REACT_APP_URL}/verifyseller/${id}`, {
+            method: "PUT",
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success(`verified sucessfull seller`)
+                    refetch()
+                }
+            })
     }
 
     return (
@@ -67,7 +86,10 @@ const AllSellers = () => {
                                         {seller.email}
                                     </td>
                                     <td>
-                                        <button className='btn btn-sm btn-primary text-white'>Verify</button>
+                                        {
+                                            seller.isVerified ? <span className='text-green-500 font-medium'>Verified</span> :
+                                                <button onClick={() => handleVerify(seller._id)} className='btn btn-sm btn-primary text-white'>Verify</button>
+                                        }
                                         <button onClick={() => handleDelete(seller)} className='btn btn-primary bg-red-500 hover:bg-red-700 duration-300 border-none text-white btn-sm ml-2'>Delete</button>
                                     </td>
                                 </tr>)
