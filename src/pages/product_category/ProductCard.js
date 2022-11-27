@@ -3,6 +3,9 @@ import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import { Link } from 'react-router-dom';
 import { MdVerified } from 'react-icons/md';
+import { GoReport } from 'react-icons/go';
+import toast from 'react-hot-toast';
+
 
 const ProductCard = ({ productItem, setProductData }) => {
     //distructure product items
@@ -12,7 +15,26 @@ const ProductCard = ({ productItem, setProductData }) => {
     // const handleBook = (id) => {
     //     console.log(id, 'Booked')
     // }
-
+    const handleReport = (item) => {
+        const reportItemData = {
+            itemId: item._id,
+            img: item.img,
+            selersName: item.selersName
+        }
+        fetch(`${process.env.REACT_APP_URL}/reportitem`, {
+            method: "POST",
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify(reportItemData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success(`Item report`)
+                }
+            })
+    }
 
     return (
         <div className="card glass">
@@ -33,7 +55,8 @@ const ProductCard = ({ productItem, setProductData }) => {
                 <p> {description}</p>
                 <div className="card-actions justify-between mt-5">
                     <p className='text-lg'>Seller: <span className='font-bold'>{selersName}{isVerified && <MdVerified className='text-primary inline-block align-text-top' />}</span></p>
-                    <label onClick={() => setProductData(productItem)} htmlFor="buynow-modal" className="btn btn-primary text-white">Booked now</label>
+                    <button onClick={() => handleReport(productItem)} className="btn btn-primary border-none bg-orange-400 hover:bg-orange-600 btn-sm text-white"><GoReport className='mr-2 text-lg' /> Report item</button>
+                    <label onClick={() => setProductData(productItem)} htmlFor="buynow-modal" className="btn mt-3  w-full btn-primary flex items-center text-white">Booked now</label>
                 </div>
             </div>
         </div>
