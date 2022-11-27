@@ -33,8 +33,8 @@ const AllSellers = () => {
     }
 
     //verify User
-    const handleVerify = (id) => {
-        fetch(`${process.env.REACT_APP_URL}/verifyseller/${id}`, {
+    const handleVerify = (email) => {
+        fetch(`${process.env.REACT_APP_URL}/verifyseller/${email}`, {
             method: "PUT",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('token')}`
@@ -88,7 +88,7 @@ const AllSellers = () => {
                                     <td>
                                         {
                                             seller.isVerified ? <span className='text-green-500 font-medium'>Verified</span> :
-                                                <button onClick={() => handleVerify(seller._id)} className='btn btn-sm btn-primary text-white'>Verify</button>
+                                                <button onClick={() => handleVerify(seller.email)} className='btn btn-sm btn-primary text-white'>Verify</button>
                                         }
                                         <button onClick={() => handleDelete(seller)} className='btn btn-primary bg-red-500 hover:bg-red-700 duration-300 border-none text-white btn-sm ml-2'>Delete</button>
                                     </td>
