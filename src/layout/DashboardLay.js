@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import Dashboard from '../pages/dashboard/Dashboard';
+import Header from '../shared/Header';
 
 const DashboardLay = () => {
     return (
-        <section className='my-10'>
+        <section>
+            <Header />
             <div className="drawer drawer-mobile">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col items-center justify-center">
@@ -25,8 +26,6 @@ const DashboardLay = () => {
 
                 </div>
             </div>
-            <Dashboard />
-            <Outlet />
         </section>
     );
 };

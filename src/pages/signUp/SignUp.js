@@ -15,9 +15,11 @@ const SignUp = () => {
     const { createNewUser, updateUser } = useContext(AuthContext);
     const imgbbAPI = process.env.REACT_APP_imgbb;
     const navigate = useNavigate();
-    const [dataLoading, setDataLoading] = useState(false)
+    const [dataLoading, setDataLoading] = useState(false);
+    const [error, setError] = useState('')
     //Log in User
     const handlesingUp = (data) => {
+        setError('')
         const img = data.img[0];
         setDataLoading(true)
 
@@ -73,7 +75,7 @@ const SignUp = () => {
                             })
                     })
                     .catch(err => {
-                        console.log(err)
+                        setError(err.message)
                         setDataLoading(false)
                     })
             })
@@ -144,8 +146,13 @@ const SignUp = () => {
                                         <option value="seller">Seller</option>
                                     </select>
                                 </div>
+                                {
+                                    error && <p className='text-red-500'>{error}</p>
+                                }
                                 <div className="form-control mt-3">
-                                    {dataLoading === true ? <button className="btn text-white border-none rounded-full bg-gradient-to-bl from-indigo-500 to-primary"> <svg className="animate-spin bg-white h-5 w-5 mr-3" viewBox="0 0 24 24"></svg> </button> : <button className="btn text-white border-none rounded-full bg-gradient-to-bl from-indigo-500 to-primary">Register </button>}
+                                    {dataLoading === true ? <button className="btn text-white border-none rounded-full bg-gradient-to-bl from-indigo-500 to-primary"> <svg className="animate-spin bg-white h-5 w-5 mr-3" viewBox="0 0 24 24"></svg> </button> :
+                                        <button className="btn text-white border-none rounded-full bg-gradient-to-bl from-indigo-500 to-primary">Register </button>
+                                    }
                                 </div>
                             </form>
                         </div>
