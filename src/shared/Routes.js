@@ -8,6 +8,7 @@ import AllSellers from "../pages/dashboard/admin/AllSellers";
 import ReportItems from "../pages/dashboard/admin/ReportItems";
 import MyOrders from "../pages/dashboard/buyer/MyOrders";
 import Dashboard from "../pages/dashboard/Dashboard";
+import Pay from "../pages/dashboard/payment/Pay";
 import MyProducts from "../pages/dashboard/seller/MyProducts";
 import Error404 from "../pages/error404/Error404";
 import Home from "../pages/home/Home";
@@ -66,6 +67,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/reporteditems',
                 element: <ReportItems />
+            },
+            {
+                path: '/dashboard/pay',
+                element: <Pay />
             }
         ]
     },

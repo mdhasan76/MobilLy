@@ -32,45 +32,50 @@ const AllSellers = () => {
 
     return (
         <div className="overflow-x-auto w-full h-full">
-            <table className="table w-full">
-                <thead>
-                    <tr>
-                        <th>
+            {
+                sellers.length === 0 ? <div className='text-center text-4xl mt-10'>
+                    no Data Found
+                </div> :
+                    <table className="table w-full">
+                        <thead>
+                            <tr>
+                                <th>
 
-                        </th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        sellers.map((seller, i) => <tr key={i}>
-                            <th>{i + 1}</th>
-                            <td>
-                                <div className="flex items-center space-x-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src={seller.img} alt="Avatar Tailwind CSS Component" />
+                                </th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                sellers.map((seller, i) => <tr key={i}>
+                                    <th>{i + 1}</th>
+                                    <td>
+                                        <div className="flex items-center space-x-3">
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle w-12 h-12">
+                                                    <img src={seller.img} alt="Avatar Tailwind CSS Component" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="font-bold">{seller.name}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">{seller.name}</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                {seller.email}
-                            </td>
-                            <td>
-                                <button className='btn btn-sm btn-primary text-white'>Verify</button>
-                                <button onClick={() => handleDelete(seller)} className='btn btn-primary bg-red-500 hover:bg-red-700 duration-300 border-none text-white btn-sm ml-2'>Delete</button>
-                            </td>
-                        </tr>)
-                    }
-                </tbody>
+                                    </td>
+                                    <td>
+                                        {seller.email}
+                                    </td>
+                                    <td>
+                                        <button className='btn btn-sm btn-primary text-white'>Verify</button>
+                                        <button onClick={() => handleDelete(seller)} className='btn btn-primary bg-red-500 hover:bg-red-700 duration-300 border-none text-white btn-sm ml-2'>Delete</button>
+                                    </td>
+                                </tr>)
+                            }
+                        </tbody>
 
-            </table>
+                    </table>
+            }
         </div>
     );
 };
