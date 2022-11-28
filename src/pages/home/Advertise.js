@@ -8,7 +8,7 @@ const Advertise = () => {
     const { data: advertizeItems = [], isLoading } = useQuery({
         queryKey: ['advertizeitems'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/advertizeitems`);
+            const res = await fetch(`${process.env.REACT_APP_URL}/advertizeitems`);
             const output = await res.json();
             return output;
         }
@@ -26,7 +26,7 @@ const Advertise = () => {
                     <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 mb-10 p-3'>
                         {
 
-                            advertizeItems.map(item => <AdvertizeCard productItem={item} />)
+                            advertizeItems.map(item => <AdvertizeCard productItem={item} key={item._id} />)
                         }
                     </div>
                 </div>}

@@ -2,7 +2,7 @@ This Is readme file
 
 
 img link: 
-<a href="https://ibb.co/yhdhvcw"><img src="https://i.ibb.co/6vrv973/realme1.jpg" alt="realme1" border="0"></a>
+<!-- <a href="https://ibb.co/yhdhvcw"><img src="https://i.ibb.co/6vrv973/realme1.jpg" alt="realme1" border="0"></a>
 <a href="https://ibb.co/hRXkrcD"><img src="https://i.ibb.co/kg3pzJQ/realme3-PRO.jpg" alt="realme3-PRO" border="0"></a>
 <a href="https://ibb.co/c8knM5n"><img src="https://i.ibb.co/5jGHtDH/realme-C12.jpg" alt="realme-C12" border="0"></a>
 <a href="https://ibb.co/d4X7DCG"><img src="https://i.ibb.co/TMJrtjm/realme-C21.jpg" alt="realme-C21" border="0"></a>
@@ -16,4 +16,4 @@ img link:
 <a href="https://ibb.co/MCVX35q"><img src="https://i.ibb.co/kS8dW6Y/vivoY11.jpg" alt="vivoY11" border="0"></a>
 <a href="https://ibb.co/znVDHxD"><img src="https://i.ibb.co/j6ksZfs/vivoY20.jpg" alt="vivoY20" border="0"></a>
 <a href="https://ibb.co/K57tqyW"><img src="https://i.ibb.co/cytWFTQ/vivoY81.jpg" alt="vivoY81" border="0"></a>
-<a href="https://ibb.co/Xprpjcc"><img src="https://i.ibb.co/tcTcQVV/vivoY93.jpg" alt="vivoY93" border="0"></a>
+<a href="https://ibb.co/Xprpjcc"><img src="https://i.ibb.co/tcTcQVV/vivoY93.jpg" alt="vivoY93" border="0"></a> -->

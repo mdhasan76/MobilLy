@@ -14,7 +14,7 @@ const Category = () => {
     const query = useQuery({
         queryKey: ['product'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/products/${id}`);
+            const res = await fetch(`${process.env.REACT_APP_URL}/products/${id}`);
             const output = await res.json();
             return output;
         }
