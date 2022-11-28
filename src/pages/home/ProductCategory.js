@@ -11,7 +11,7 @@ const ProductCategory = () => {
         queryKey: ['allsellers'],
         queryFn: async () => {
             const res =
-                await fetch(`http://localhost:5000/allproducts`);
+                await fetch(`${process.env.REACT_APP_URL}/allproducts`);
             const output = await res.json();
             return output
         }

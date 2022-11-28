@@ -22,14 +22,14 @@ const Header = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><Link to='/'>Home</Link></li>
-                        <li><Link to='/category/1'>ViVo</Link></li>
-                        <li><Link to='/category/2'>Samsung</Link></li>
-                        <li><Link to='/category/3'>Realme</Link></li>
-                        <li><Link to='/blog'>Blog</Link></li>
+                        <li><Link to='/' className='font-medium'>Home</Link></li>
+                        <li><Link to='/category/1' className='font-medium'>ViVo</Link></li>
+                        <li><Link to='/category/2' className='font-medium'>Samsung</Link></li>
+                        <li><Link to='/category/3' className='font-medium'>Realme</Link></li>
+                        <li><Link to='/blog' className='font-medium'>Blog</Link></li>
                         {
                             user?.email &&
-                            <li><Link to='/dashboard'>Dashboard</Link></li>
+                            <li><Link to='/dashboard' className='font-medium'>Dashboard</Link></li>
 
                         }
                         <li><button onClick={handleLogOut} className=' btn btn-sm md:btn-md btn-primary ml-2 text-white'>Logout
@@ -40,14 +40,14 @@ const Header = () => {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
-                    <li><Link to='/'>Home</Link></li>
-                    <li><Link to='/category/1'>ViVo</Link></li>
-                    <li><Link to='/category/2'>Samsung</Link></li>
-                    <li><Link to='/category/3'>Realme</Link></li>
-                    <li><Link to='/blog'>Blog</Link></li>
+                    <li><Link to='/' className='font-medium'>Home</Link></li>
+                    <li><Link to='/category/1' className='font-medium'>ViVo</Link></li>
+                    <li><Link to='/category/2' className='font-medium'>Samsung</Link></li>
+                    <li><Link to='/category/3' className='font-medium'>Realme</Link></li>
+                    <li><Link to='/blog' className='font-medium'>Blog</Link></li>
                     {
                         user?.email &&
-                        <li><Link to='/dashboard'>Dashboard</Link></li>
+                        <li><Link to='/dashboard' className='font-medium'>Dashboard</Link></li>
 
                     }
                 </ul>
@@ -63,7 +63,7 @@ const Header = () => {
                         <button onClick={handleLogOut} className='hidden sm:inline-block btn btn-sm md:btn-md btn-primary ml-2 text-white'>Logout
                         </button></>
                         :
-                        <Link to='/login' className='btn btn-primary'>Login</Link>}
+                        <Link to='/login' className='btn btn-primary text-white'>Login</Link>}
             </div>
         </div>
     );
