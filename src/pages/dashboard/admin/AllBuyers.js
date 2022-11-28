@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
+import Spiner from '../../../shared/Spiner'
 
 const AllBuyers = () => {
-    const { data: buyers = [], refetch } = useQuery({
+    const { data: buyers = [], refetch, isLoading } = useQuery({
         queryKey: ['allbuyers'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_URL}/allbuyers`);
@@ -30,6 +31,9 @@ const AllBuyers = () => {
         }
     }
     // console.log(query)
+    if (isLoading) {
+        return <Spiner />
+    }
     return (
         <div className="overflow-x-auto w-full h-full">
             <table className="table w-full">

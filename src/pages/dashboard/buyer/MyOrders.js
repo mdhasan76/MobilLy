@@ -23,7 +23,6 @@ const MyOrders = () => {
             }
         }
     })
-    console.log(myOrders)
     return (
         <div className="overflow-x-auto w-full h-full">
             <table className="table w-full">
@@ -57,7 +56,7 @@ const MyOrders = () => {
                                 {order.price} Tk
                             </td>
                             <td>
-                                <Link to='/dashboard/pay'><button className='btn btn-sm btn-primary text-white'>Pay</button></Link>
+                                <Link to={`/dashboard/pay/${order._id}`}><button className='btn btn-sm btn-primary text-white'>Pay</button></Link>
                             </td>
                         </tr>)
                     }

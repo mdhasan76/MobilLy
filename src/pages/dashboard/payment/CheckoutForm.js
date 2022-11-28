@@ -1,79 +1,126 @@
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import toast from 'react-hot-toast'
 
-const CheckoutForm = () => {
-    const stripe = useStripe();
-    const elements = useElements();
-    const [cardError, setCardError] = useState('')
+const Checkout = ({ bookData }) => {
+    const [cardErr, setCardErr] = useState('')
     const [clientSecret, setClientSecret] = useState("");
     const [success, setSuccess] = useState('');
     const [transitionId, setTransitionId] = useState('')
+    const stripe = useStripe();
+    const elements = useElements();
+
+    //distructure data 
+    const { price, email, userName } = bookData;
 
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("https://doctors-portal-server-mdhasan76.vercel.app/create-payment-intent", {
+        fetch(`${process.env.REACT_APP_URL}/create-payment-intent`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 authorization: `bearer ${localStorage.getItem('token')}`
             },
-            body: JSON.stringify({}),
+            body: JSON.stringify({ price }),
         })
             .then((res) => res.json())
             .then((data) => {
                 // console.log(data.clientSecret)
                 setClientSecret(data.clientSecret)
             });
-    }, []);
+    }, [price]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    //card data submit 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log('handle submit a click korso')
+
         if (!stripe || !elements) {
-            return;
-        }
-        const card = elements.getElement(CardElement);
-        if (card === null) {
             return
         }
+        const card = elements.getElement(CardElement);
+
+        if (card == null) {
+            return;
+        }
+
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card,
-        })
-
+        });
         if (error) {
-            console.log(error)
-            setCardError(error.message)
+            setCardErr(error.message)
         } else {
-            setCardError('')
+            setCardErr('')
         }
 
-
-    }
-    return (
-        <form onSubmit={handleSubmit} className="border p-5">
-            <CardElement
-                options={{
-                    style: {
-                        base: {
-                            fontSize: '16px',
-                            color: '#424770',
-                            '::placeholder': {
-                                color: '#aab7c4',
-                            },
-                        },
-                        invalid: {
-                            color: '#9e2146',
+        const { paymentIntent, error: confirmError } = await
+            stripe.confirmCardPayment(
+                clientSecret,
+                {
+                    payment_method: {
+                        card: card,
+                        billing_details: {
+                            name: userName,
+                            email: email
                         },
                     },
-                }}
-            />
-            <p className='text-red-500 text-xm py-3'>{cardError}</p>
-            <button type="submit" className='btn btn-primary btn-md text-white' disabled={!stripe}>
-                Pay
-            </button>
-        </form>
+                },
+            );
+
+        if (confirmError) {
+            setCardErr(confirmError.message)
+            return;
+        }
+
+        console.log(paymentIntent)
+        // console.log("error focuse last line", paymentIntent)
+    }
+
+    // const paymentFetch = async (value) => {
+    //     const url = 'https://doctors-portal-server-mdhasan76.vercel.app/paymentConfirm'
+    //     const res = await fetch(url, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(value)
+    //     });
+    //     const data = await res.json();
+    //     return data;
+
+    // }
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <CardElement
+                    options={{
+                        style: {
+                            base: {
+                                fontSize: '16px',
+                                color: '#424770',
+                                '::placeholder': {
+                                    color: '#aab7c4',
+                                },
+                            },
+                            invalid: {
+                                color: '#9e2146',
+                            },
+                        },
+                    }}
+                />
+                <p className='text-red-500 mt-5'>{cardErr}</p>
+                <button type="submit" className='btn btn-sm btn-primary mt-3 text-white' disabled={!stripe || !clientSecret}>
+                    Pay
+                </button>
+            </form>
+            <div className='py-3'>
+                <p>{success}</p>
+                <p className='font-bold'>{transitionId}</p>
+            </div>
+        </div>
     );
 };
 
-export default CheckoutForm;
+export default Checkout;

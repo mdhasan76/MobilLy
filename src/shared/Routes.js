@@ -69,7 +69,8 @@ export const router = createBrowserRouter([
                 element: <ReportItems />
             },
             {
-                path: '/dashboard/pay',
+                path: '/dashboard/pay/:id',
+                loader: ({ params }) => fetch(`${process.env.REACT_APP_URL}/booked/${params.id}`),
                 element: <Pay />
             }
         ]

@@ -43,8 +43,7 @@ const ReportItems = () => {
                                 <th>
 
                                 </th>
-                                <th>Name</th>
-                                <th>Email</th>
+                                <th> Seller Name & img</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

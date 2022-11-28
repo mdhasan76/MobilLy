@@ -1,9 +1,10 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import Spiner from '../../../shared/Spiner';
 
 const AllSellers = () => {
-    const { data: sellers = [], refetch } = useQuery({
+    const { data: sellers = [], refetch, isLoading } = useQuery({
         queryKey: ['allsellers'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_URL}/allsellers`);
@@ -47,6 +48,9 @@ const AllSellers = () => {
                     refetch()
                 }
             })
+    }
+    if (isLoading) {
+        return <Spiner />
     }
 
     return (
