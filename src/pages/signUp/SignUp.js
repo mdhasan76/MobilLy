@@ -9,14 +9,22 @@ import { AuthContext } from '../../shared/AuthProvider';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
+import useToken from '../../shared/hooks/useTokenjwt';
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { createNewUser, updateUser } = useContext(AuthContext);
+    const [createrUserEmail, setCreatedUserEmail] = useState('')
     const imgbbAPI = process.env.REACT_APP_imgbb;
-    const navigate = useNavigate();
     const [dataLoading, setDataLoading] = useState(false);
     const [error, setError] = useState('');
+    const [token] = useToken(createrUserEmail)
+    const navigate = useNavigate();
+
+
+    if (token) {
+        navigate('/')
+    }
     //Log in User
     const handlesingUp = (data) => {
         setError('')
@@ -64,7 +72,7 @@ const SignUp = () => {
                                             toast.success("Create Your account successfull")
                                             console.log(res.user);
                                             setDataLoading(false)
-                                            getToken(data.email)
+                                            setCreatedUserEmail(data.email)
                                         }
                                     })
                             })
@@ -78,19 +86,6 @@ const SignUp = () => {
                         setDataLoading(false)
                     })
             })
-    }
-    const getToken = (email) => {
-        fetch(`${process.env.REACT_APP_URL}/jwt?email=${email}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if (data.accessToken) {
-                    localStorage.setItem("token", data.accessToken)
-                    navigate('/')
-                }
-
-            })
-
     }
     return (
         <section>

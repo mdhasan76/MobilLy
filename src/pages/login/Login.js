@@ -7,17 +7,20 @@ import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../shared/AuthProvider';
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../../shared/hooks/useTokenjwt';
 
 const Login = () => {
     const { logInUser, googleSignIn } = useContext(AuthContext);
-    // const [token] = useToken(loggedUser)
     const [error, setError] = useState('');
+    const [loggedUser, setLoggedUser] = useState('')
     const location = useLocation();
     const navigate = useNavigate();
+    const [token] = useToken(loggedUser)
     let from = location.state?.from?.pathname || "/";
-    // if (token) {
-    //     navigate(from, { replace: true })
-    // }
+
+    if (token) {
+        navigate(from, { replace: true })
+    }
     //Log in User
     const handleLogIn = (event) => {
         event.preventDefault()
@@ -30,26 +33,12 @@ const Login = () => {
             .then(res => {
                 // setLoggedUser(res.user.email)
                 // console.log(loggedUser)
-                getToken(res.user.email)
+                setLoggedUser(res.user.email)
                 toast.success("Log In sucessFul");
-                navigate(from, { replace: true });
             })
             .catch(err => {
                 setError(err.message)
             })
-    }
-
-    const getToken = (email) => {
-        fetch(`${process.env.REACT_APP_URL}/jwt?email=${email}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data.accessToken) {
-                    localStorage.setItem("token", data.accessToken)
-                    navigate(from, { replace: true })
-                }
-
-            })
-
     }
 
     //sign in with googel 

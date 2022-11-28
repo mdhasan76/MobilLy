@@ -9,12 +9,11 @@ const MyOrders = () => {
         queryKey: ['/myorders', user?.email],
         queryFn: async () => {
             try {
-                const res = await
-                    fetch(`${process.env.REACT_APP_URL}/myorders?email=${user?.email}`, {
-                        headers: {
-                            authorization: `Bearer ${localStorage.getItem('token')}`
-                        }
-                    });
+                const res = await fetch(`${process.env.REACT_APP_URL}/myorders?email=${user?.email}`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
                 const output = await res.json();
                 return output
             }
@@ -38,7 +37,7 @@ const MyOrders = () => {
                 </thead>
                 <tbody>
                     {
-                        myOrders.map((order, i) => <tr key={i}>
+                        myOrders?.map((order, i) => <tr key={i}>
                             <th>{i + 1}</th>
                             <td>
                                 <div className="flex items-center space-x-3">
