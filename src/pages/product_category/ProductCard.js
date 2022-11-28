@@ -10,6 +10,9 @@ import toast from 'react-hot-toast';
 const ProductCard = ({ productItem, setProductData }) => {
     //distructure product items
     const { condition, description, img, location, marketPrice, name, postTime, selersName, selingPrice, useTime, ramRoom, isVerified } = productItem;
+    if (productItem?.paid) {
+        return;
+    }
 
     //Bookin function
     // const handleBook = (id) => {
