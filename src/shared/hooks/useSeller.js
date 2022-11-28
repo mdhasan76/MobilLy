@@ -5,7 +5,7 @@ const useSeller = (email) => {
     const [sellerLoading, setSellerLoasding] = useState(true);
     useEffect(() => {
         if (email) {
-            fetch(`https://doctors-portal-server-mdhasan76.vercel.app/dashboard/allusers/${email}`)
+            fetch(`${process.env.REACT_APP_URL}/dashboard/allusers/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)

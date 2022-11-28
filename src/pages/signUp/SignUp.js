@@ -16,17 +16,16 @@ const SignUp = () => {
     const imgbbAPI = process.env.REACT_APP_imgbb;
     const navigate = useNavigate();
     const [dataLoading, setDataLoading] = useState(false);
-    const [error, setError] = useState('')
+    const [error, setError] = useState('');
     //Log in User
     const handlesingUp = (data) => {
         setError('')
         const img = data.img[0];
         setDataLoading(true)
-
         // upload img in imgbb 
         const formData = new FormData();
         formData.append('image', img)
-        fetch(`https://api.imgbb.com/1/upload?expiration=600&key=${imgbbAPI}`, {
+        fetch(`https://api.imgbb.com/1/upload?key=${imgbbAPI}`, {
             method: "POST",
             body: formData
         })
@@ -65,7 +64,7 @@ const SignUp = () => {
                                             toast.success("Create Your account successfull")
                                             console.log(res.user);
                                             setDataLoading(false)
-                                            navigate('/')
+                                            getToken(data.email)
                                         }
                                     })
                             })
@@ -79,6 +78,19 @@ const SignUp = () => {
                         setDataLoading(false)
                     })
             })
+    }
+    const getToken = (email) => {
+        fetch(`${process.env.REACT_APP_URL}/jwt?email=${email}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.accessToken) {
+                    localStorage.setItem("token", data.accessToken)
+                    navigate('/')
+                }
+
+            })
+
     }
     return (
         <section>
