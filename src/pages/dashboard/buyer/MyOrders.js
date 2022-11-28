@@ -25,7 +25,7 @@ const MyOrders = () => {
     return (
         <div className="overflow-x-auto w-full h-full">
             {
-                myOrders.length === 0 ?
+                myOrders?.length === 0 ?
                     <p className='text-4xl mt-10 font-bold text-center'>Do not have order yet</p> :
                     <table className="table w-full">
                         <thead>
