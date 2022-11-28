@@ -11,7 +11,8 @@ const Checkout = ({ bookData }) => {
     const elements = useElements();
 
     //distructure data 
-    const { price, email, userName, _id } = bookData;
+    const { price, email, userName, _id,
+        productId } = bookData;
 
 
     useEffect(() => {
@@ -34,7 +35,6 @@ const Checkout = ({ bookData }) => {
     //card data submit 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('handle submit a click korso')
 
         if (!stripe || !elements) {
             return
@@ -45,7 +45,7 @@ const Checkout = ({ bookData }) => {
             return;
         }
 
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error } = await stripe.createPaymentMethod({
             type: 'card',
             card,
         });
@@ -77,31 +77,31 @@ const Checkout = ({ bookData }) => {
         if (paymentIntent.status === "succeeded") {
             setTransitionId(paymentIntent.id)
             setSuccess("Your Payment is Successfully paid");
-            console.log(paymentIntent)
+            // console.log(paymentIntent)
             const paymentObj = {
                 success: "Your Payment is Sucessfull paid",
                 transitionId: paymentIntent.id,
                 email: email,
-                bookingId: _id
+                bookingId: _id,
+                productId,
+                paid: true
             }
-            console.log(paymentObj)
+            fetch(`${process.env.REACT_APP_URL}/paymentConfirm`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(paymentObj)
+            })
+                .then(res => res.json())
+                .then(dbData => {
+                    if (dbData.acknowledged) {
+                        toast.success("Payment sucessfull")
+                    }
+                })
         }
-        // console.log("error focuse last line", paymentIntent)
     }
 
-    // const paymentFetch = async (value) => {
-    //     const url = 'https://doctors-portal-server-mdhasan76.vercel.app/paymentConfirm'
-    //     const res = await fetch(url, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify(value)
-    //     });
-    //     const data = await res.json();
-    //     return data;
-
-    // }
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -128,7 +128,7 @@ const Checkout = ({ bookData }) => {
             </form>
             <div className='py-3'>
                 <p>{success}</p>
-                <p className='font-bold'>{transitionId}</p>
+                <p className='font-bold text-primary'>{transitionId}</p>
             </div>
         </div>
     );

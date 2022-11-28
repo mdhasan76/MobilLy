@@ -7,7 +7,7 @@ import { useLoaderData } from 'react-router-dom'
 const stripePromise = loadStripe(`${process.env.REACT_APP_STRIP_KEY}`)
 const Pay = () => {
     const data = useLoaderData();
-    console.log(data)
+    // console.log(data)
     return (
         <div className='max-w-lg mt-10'>
             <p className='text-3xl font-bold my-3'>Payment</p>
