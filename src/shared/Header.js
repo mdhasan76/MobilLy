@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom'
 import { AuthContext } from './AuthProvider';
-import toast from 'react-hot-toast'
-
+import toast from 'react-hot-toast';
+import { RiDashboardFill } from "react-icons/ri"
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
 
@@ -23,23 +23,17 @@ const Header = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link to='/'>Home</Link></li>
-                        <li tabIndex={0}>
-                            <a href="/" className="justify-between">
-                                Category
-                                <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
-                            </a>
-                            <ul className="p-2 bg-white">
-                                <li><Link to='/1'>ViVo</Link></li>
-                                <li><Link to='/2'>Samsung</Link></li>
-                                <li><Link to='/3'>Realme</Link></li>
-                            </ul>
-                        </li>
+                        <li><Link to='/category/1'>ViVo</Link></li>
+                        <li><Link to='/category/2'>Samsung</Link></li>
+                        <li><Link to='/category/3'>Realme</Link></li>
                         <li><Link to='/blog'>Blog</Link></li>
                         {
                             user?.email &&
                             <li><Link to='/dashboard'>Dashboard</Link></li>
 
                         }
+                        <li><button onClick={handleLogOut} className=' btn btn-sm md:btn-md btn-primary ml-2 text-white'>Logout
+                        </button></li>
                     </ul>
                 </div>
                 <a href="/" className="btn btn-ghost normal-case text-xl">MobilLy</a>
@@ -47,17 +41,9 @@ const Header = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
                     <li><Link to='/'>Home</Link></li>
-                    <li tabIndex={0}>
-                        <a href="/">
-                            Category
-                            <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
-                        </a>
-                        <ul className="p-2 bg-white duration-300">
-                            <li><Link to='/category/1'>ViVo</Link></li>
-                            <li><Link to='/category/2'>Samsung</Link></li>
-                            <li><Link to='/category/3'>Realme</Link></li>
-                        </ul>
-                    </li>
+                    <li><Link to='/category/1'>ViVo</Link></li>
+                    <li><Link to='/category/2'>Samsung</Link></li>
+                    <li><Link to='/category/3'>Realme</Link></li>
                     <li><Link to='/blog'>Blog</Link></li>
                     {
                         user?.email &&
@@ -67,12 +53,14 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
+
+                <label htmlFor="dashboard-drawer" className=" items-center flex mr-2 font-medium lg:hidden"> <RiDashboardFill className='text-lg font-bold' /></label>
                 {
                     user?.email ? <>
                         <div className='tooltip tooltip-bottom' data-tip={user.displayName}>
                             <img src={user?.photoURL} className='h-10 w-10 tooltip  rounded-full' alt="img" />
                         </div>
-                        <button onClick={handleLogOut} className='btn btn-primary ml-2'>Logout
+                        <button onClick={handleLogOut} className='hidden sm:inline-block btn btn-sm md:btn-md btn-primary ml-2 text-white'>Logout
                         </button></>
                         :
                         <Link to='/login' className='btn btn-primary'>Login</Link>}

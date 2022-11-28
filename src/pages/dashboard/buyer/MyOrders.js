@@ -24,47 +24,51 @@ const MyOrders = () => {
     })
     return (
         <div className="overflow-x-auto w-full h-full">
-            <table className="table w-full">
-                <thead>
-                    <tr>
-                        <th>
+            {
+                myOrders.length === 0 ?
+                    <p className='text-4xl mt-10 font-bold text-center'>Do not have order yet</p> :
+                    <table className="table w-full">
+                        <thead>
+                            <tr>
+                                <th>
 
-                        </th>
-                        <th>Name</th>
-                        <th>price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        myOrders?.map((order, i) => <tr key={i}>
-                            <th>{i + 1}</th>
-                            <td>
-                                <div className="flex items-center space-x-3">
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-12 h-12">
-                                            <img src={order.productImg} alt="Product img" />
+                                </th>
+                                <th>Name</th>
+                                <th>price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                myOrders?.map((order, i) => <tr key={i}>
+                                    <th>{i + 1}</th>
+                                    <td>
+                                        <div className="flex items-center space-x-3">
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle w-12 h-12">
+                                                    <img src={order.productImg} alt="Product img" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="font-bold">{order.productName}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold">{order.productName}</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                {order.price} Tk
-                            </td>
-                            <td>
-                                {order?.paid ? <p className='text-primary'>paid</p>
-                                    :
-                                    <Link to={`/dashboard/pay/${order._id}`}><button className='btn btn-sm btn-primary text-white'>Pay</button></Link>
-                                }
-                            </td>
-                        </tr>)
-                    }
-                </tbody>
+                                    </td>
+                                    <td>
+                                        {order.price} Tk
+                                    </td>
+                                    <td>
+                                        {order?.paid ? <p className='text-primary'>paid</p>
+                                            :
+                                            <Link to={`/dashboard/pay/${order._id}`}><button className='btn btn-sm btn-primary text-white'>Pay</button></Link>
+                                        }
+                                    </td>
+                                </tr>)
+                            }
+                        </tbody>
 
-            </table>
+                    </table>
+            }
         </div>
     );
 };
