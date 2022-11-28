@@ -17,6 +17,7 @@ import Category from "../pages/product_category/Category";
 import SignUp from "../pages/signUp/SignUp";
 import PrivateRoute from '../shared/PrivateRoute';
 import AdminRoute from '../shared/AdminRoute'
+import SellerRoute from "./SellerRoute";
 
 export const router = createBrowserRouter([
     {
@@ -47,11 +48,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/allseller',
-                element: <AllSellers />
+                element: <AdminRoute><AllSellers /></AdminRoute>
             },
             {
                 path: '/dashboard/allbuyer',
-                element: <AllBuyers />
+                element: <AdminRoute><AllBuyers /></AdminRoute>
+            },
+            {
+                path: '/dashboard/reporteditems',
+                element: <AdminRoute><ReportItems /></AdminRoute>
             },
             {
                 path: '/dashboard/myorders',
@@ -59,15 +64,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/addproduct',
-                element: <AddProduct />
+                element: <SellerRoute> <AddProduct /></SellerRoute>
             },
             {
                 path: '/dashboard/myproducts',
-                element: <MyProducts />
-            },
-            {
-                path: '/dashboard/reporteditems',
-                element: <ReportItems />
+                element: <SellerRoute><MyProducts /></SellerRoute>
             },
             {
                 path: '/dashboard/pay/:id',
