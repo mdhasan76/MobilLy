@@ -11,7 +11,7 @@ const Checkout = ({ bookData }) => {
     const elements = useElements();
 
     //distructure data 
-    const { price, email, userName } = bookData;
+    const { price, email, userName, _id } = bookData;
 
 
     useEffect(() => {
@@ -74,7 +74,18 @@ const Checkout = ({ bookData }) => {
             return;
         }
 
-        console.log(paymentIntent)
+        if (paymentIntent.status === "succeeded") {
+            setTransitionId(paymentIntent.id)
+            setSuccess("Your Payment is Successfully paid");
+            console.log(paymentIntent)
+            const paymentObj = {
+                success: "Your Payment is Sucessfull paid",
+                transitionId: paymentIntent.id,
+                email: email,
+                bookingId: _id
+            }
+            console.log(paymentObj)
+        }
         // console.log("error focuse last line", paymentIntent)
     }
 
