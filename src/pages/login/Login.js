@@ -43,7 +43,6 @@ const Login = () => {
         fetch(`${process.env.REACT_APP_URL}/jwt?email=${email}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 if (data.accessToken) {
                     localStorage.setItem("token", data.accessToken)
                     navigate(from, { replace: true })
