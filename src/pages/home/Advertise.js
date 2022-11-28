@@ -1,46 +1,36 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import vivologo from '../../assets/vivologo.png';
-import realmelogo from '../../assets/realmelogo.png';
-import samsunglogo from '../../assets/samesunglogo.png';
+import Spiner from '../../shared/Spiner'
+import AdvertizeCard from './AdvertizeCard';
 
 const Advertise = () => {
+    ;
+    const { data: advertizeItems = [], isLoading } = useQuery({
+        queryKey: ['advertizeitems'],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/advertizeitems`);
+            const output = await res.json();
+            return output;
+        }
+    })
+    console.log(advertizeItems);
+
+    if (isLoading) {
+        return <Spiner />
+    }
     return (
-        <section className='py-10 '>
-            <div className='mb-10 text-center'>
-                <h1 className='text-3xl sm:text-6xl font-semibold pb-7'>Advertise Items</h1>
-            </div>
-            <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-6'>
-                <div className='border w-9/12 mx-auto hover:shadow-lg bg-white'>
-                    <Link to='/'>
-                        <img src={vivologo} className='h-44 sm:h-60 w-full' alt="" />
-                        <div className='text-center p-2'>
-                            <h4 className='text-lg font-semibold md:text-2xl pt-2'>VIVO</h4>
-                            <p className='font-medium opacity-80'>{'3'} items</p>
-                        </div></Link>
-                </div>
+        <div >
+            {advertizeItems.length > 0 &&
                 <div>
-                    <div className='border w-9/12 mx-auto hover:shadow-lg bg-white'>
-                        <Link to='/'>
-                            <img src={samsunglogo} className='h-44 sm:h-60  w-full' alt="" />
-                            <div className='text-center p-2'>
-                                <h4 className='text-lg font-semibold md:text-2xl pt-2'>SAMSUNG</h4>
-                                <p className='font-medium opacity-80'>{'3'} items</p>
-                            </div></Link>
+
+                    <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 mb-10 p-3'>
+                        {
+
+                            advertizeItems.map(item => <AdvertizeCard productItem={item} />)
+                        }
                     </div>
-                </div>
-                <div>
-                    <div className='border w-9/12 mx-auto hover:shadow-lg bg-white'>
-                        <Link to='/'>
-                            <img src={realmelogo} className='h-44 sm:h-60  w-full' alt="" />
-                            <div className='text-center p-2'>
-                                <h4 className='text-lg font-semibold md:text-2xl pt-2'>Realme</h4>
-                                <p className='font-medium opacity-80'>{'3'} items</p>
-                            </div></Link>
-                    </div>
-                </div>
-            </div>
-        </section>
+                </div>}
+        </div>
     );
 };
 
