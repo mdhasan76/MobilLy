@@ -7,7 +7,7 @@ MOBILELY -the second hand product seller website.
 
 3. server side repo:- https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-mdhasan76
 
-# `$ useges technology:-`
+# `useges technology:-`
 i. DaisyUI
 ii. React
 iii. React icon
