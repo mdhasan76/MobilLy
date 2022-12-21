@@ -15,7 +15,7 @@ const Slider = () => {
                         <p className='text-sm sm:text-lg py-3 text-white  opacity-90'>Clean Second Hand VIVO Phone. <br />
                             Get newest vivo second hand phone
                         </p>
-                        <Link to='/' className='btn btn-secondary text-white text-lg duration-300 hover:bg-orange-600 hover:scale-105'>Buy Now</Link>
+                        <Link to='/category/1' className='btn btn-secondary text-white text-lg duration-300 hover:bg-orange-600 hover:scale-105'>Buy Now</Link>
                     </div>
                     <a href="#slide2" className="btn btn-circle">❯</a>
                 </div>
@@ -26,10 +26,10 @@ const Slider = () => {
                     <a href="#slide1" className="btn btn-circle ml-5">❮</a>
                     <div className='text-center'>
                         <h3 className='text-3xl sm:text-6xl text-white font-semibold'>New Samsung phone Collection</h3>
-                        <p className='text-sm sm:text-lg py-3 text-white  opacity-90'>Clean Second Hand VIVO Phone. <br />
+                        <p className='text-sm sm:text-lg py-3 text-white  opacity-90'>Clean Second Hand Samsung Phone. <br />
                             Get newest vivo second hand phone
                         </p>
-                        <Link to='/' className='btn btn-secondary text-white text-lg duration-300 hover:bg-orange-600 hover:scale-105'>Buy Now</Link>
+                        <Link to='/category/2' className='btn btn-secondary text-white text-lg duration-300 hover:bg-orange-600 hover:scale-105'>Buy Now</Link>
                     </div>
                     <a href="#slide3" className="btn btn-circle">❯</a>
                 </div>
@@ -43,7 +43,7 @@ const Slider = () => {
                         <p className='text-sm sm:text-lg py-3 text-white  opacity-90'>Clean Second Hand Realme Phone. <br />
                             Get newest vivo second hand phone
                         </p>
-                        <Link to='/' className='btn btn-secondary text-white text-lg duration-300 hover:bg-orange-600 hover:scale-105'>Buy Now</Link>
+                        <Link to='/category/3' className='btn btn-secondary text-white text-lg duration-300 hover:bg-orange-600 hover:scale-105'>Buy Now</Link>
                     </div>
                     <a href="#slide1" className="btn btn-circle">❯</a>
                 </div>

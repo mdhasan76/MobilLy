@@ -1,9 +1,6 @@
 MOBILELY -the second hand product seller website.
 
 
-admin id:- hasan@mia.com
-admin pass:- 123456A
-
 ---------------link--------------------
 1. live site Link:- https://mobilly76.web.app/
 2. client side repo:- https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-mdhasan76
@@ -20,6 +17,17 @@ vi. react hook form
 vii. firebase
 viii. tailwind etc..
 
+#API
+For img hoisting. I used Imgbb api.
+
 About this site: 
 this is a second hand seling mobile phone web site.there are 3 type of route have. Admin, buyer, seller. A seller can add product and see her/his whole product. a admin delete any user and verify a seller. a buyer can buy a product and report againgst fake products.
+
+
+
+
+
+
+admin id:- hasan@mia.com
+admin pass:- 123456A
 
