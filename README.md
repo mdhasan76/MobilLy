@@ -28,6 +28,5 @@ this is a second hand seling mobile phone web site.there are 3 type of route hav
 
 
 
-admin id:- hasan@mia.com
 admin pass:- 123456A
 
